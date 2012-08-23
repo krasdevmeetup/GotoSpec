@@ -13,7 +13,13 @@ Dead simple Sublime Text 2 Plugin, which allows you to quickly open spec for cur
 
 ### On Linux ###
 
- You're a smart linux user. How can I teach you?
+```bash
+cd ~/.config/sublime-text-2/Packages
+git clone https://github.com/krasdevmeetup/GotoSpec.git
+```
+
+Use `Ctrl + Shift + \` to open spec file.
+
 
 ## Authors ##
 
