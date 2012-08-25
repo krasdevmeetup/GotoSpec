@@ -8,8 +8,12 @@ Dead simple Sublime Text 2 Plugin, which allows you to quickly open spec for cur
 
 ### On Mac ###
 
- * Go to ~/Library/Application Support/Sublime Text 2/Packages
- * Run git clone https://github.com/krasdevmeetup/GotoSpec.git
+```bash
+cd ~/Library/Application Support/Sublime Text 2/Packages
+git clone https://github.com/krasdevmeetup/GotoSpec.git
+```
+
+Use `Cmd + Shift + \` to open spec file.
 
 ### On Linux ###
 
@@ -19,7 +23,6 @@ git clone https://github.com/krasdevmeetup/GotoSpec.git
 ```
 
 Use `Ctrl + Shift + \` to open spec file.
-
 
 ## Authors ##
 
