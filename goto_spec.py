@@ -1,13 +1,13 @@
 import os
-import sublime
 import sublime_plugin
+from itertools import takewhile
 
 
 class GotoSpecCommand(sublime_plugin.WindowCommand):
     def run(self):
-        path = self.window.active_view().file_name()
-        file_name = path.split('/')[-1]
-        rspec_filename = file_name.replace(".rb", "_spec.rb")
+        file_path = self.window.active_view().file_name()
+        rspec_file_path = file_path.replace(".rb", "_spec.rb")
+        rspec_file_name = rspec_file_path.split('/')[-1]
 
         if not self.window.folders():
             return
@@ -19,15 +19,21 @@ class GotoSpecCommand(sublime_plugin.WindowCommand):
             return
 
         files = list_files(spec_folder)
-        files = [f for f in files if f.endswith('/' + rspec_filename)]
-        if not files:
+        matches = [common_start_len(f[::-1], rspec_file_path[::-1]) for f in files]
+
+        if not matches:
             return
-        spec_file = files[0]
+
+        perfect_match = files[matches.index(max(matches))]
+
+        if not perfect_match.endswith(rspec_file_name):
+            return
 
         if self.window.num_groups() > 1:
             self.window.focus_group(1)
 
-        self.window.open_file(spec_file)
+        self.window.open_file(perfect_match)
+
 
 def list_files(dirname):
     files = []
@@ -35,3 +41,7 @@ def list_files(dirname):
         for filename in filenames:
             files.append(os.path.join(dirname, filename))
     return files
+
+
+def common_start_len(a, b):
+    return len(list(takewhile(lambda (x, y): x == y, zip(a, b))))
