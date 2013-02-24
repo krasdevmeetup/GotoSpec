@@ -25,6 +25,9 @@ class GotoSpecCommand(sublime_plugin.WindowCommand):
 
         perfect_match = search_in_directory(searched_file_path, search_path)
 
+        if not perfect_match:
+            return
+
         if self.window.num_groups() > 1:
             self.window.focus_group(1 if searching_spec else 0)
 
